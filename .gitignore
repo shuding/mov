@@ -1,0 +1,10 @@
+
+.DS_Store
+.idea
+
+db
+node_modules
+
+result.txt
+
+core/classifier*
