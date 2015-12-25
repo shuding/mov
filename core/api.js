@@ -28,8 +28,8 @@ let ex = {};
 for (let f in fn) {
     if (fn.hasOwnProperty(f)) {
         ex[f] = fn[f];
-        // Functions start with a underscore will auto cache the request in DB
-        ex['_' + f] = ((f) => (...args) => __(f, fn[f], ...args))(f);
+        // Functions start with a underscore will cache this request into DB
+        ex['_' + f] = (f => (...a) => __(f, fn[f], ...a))(f);
     }
 }
 
@@ -56,7 +56,7 @@ function __(name, fn, ...args) {
     db.get(key, (err, value) => {
         if (err) {
             // Not cached
-            fn(...args).then((val) => {
+            fn(...args).then(val => {
                 // Save val into DB
                 def.resolve(val);
                 db.put(key, JSON.stringify(val));
