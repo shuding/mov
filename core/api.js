@@ -132,15 +132,15 @@ function getMovieReviewsListFromId(id, offset = 0) {
     let def = Q.defer();
 
     jsdom.env({
-        url: api,
+        url:  api,
         done: (err, window) => {
             let reviews = [];
             [].forEach.call(window.document.getElementsByClassName('review'), (el) => {
                 let ratingMatch = el.getElementsByClassName('review-hd-info')[0].innerHTML.match(/allstar(\d+)/);
                 reviews.push({
-                    votes:   el.getElementsByClassName('review-short-ft')[0].innerHTML.match(/\>(\d+\/\d+)\</)[1],
-                    rating:  ratingMatch ? Number(ratingMatch[1]) : -1,
-                    id: el.getElementsByClassName('review-hd-expand')[0].id.match(/-(\d+)/)[1]
+                    votes:  el.getElementsByClassName('review-short-ft')[0].innerHTML.match(/\>(\d+\/\d+)\</)[1],
+                    rating: ratingMatch ? Number(ratingMatch[1]) : -1,
+                    id:     el.getElementsByClassName('review-hd-expand')[0].id.match(/-(\d+)/)[1]
                 });
             });
             def.resolve(reviews);
@@ -155,7 +155,7 @@ function getMovieReviewContentById(id) {
     let def = Q.defer();
 
     jsdom.env({
-        url: api,
+        url:  api,
         done: (err, window) => {
             def.resolve(window.document.getElementById('link-report').textContent.trim());
         }

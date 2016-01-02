@@ -116,15 +116,19 @@ let movies = ['机器人总动员',
               '八恶人',
               '万物理论',
               '云中行走',
-              '星运里的错'];
+              '史蒂夫',
+              '星运里的错',
+              '维多利亚'];
+
+movies = ['天使爱美丽'];
 
 movies.forEach(name => {
     mov.movieKeywords({
         movieName: name,
         wordCount: 10,
         dataSet: 20
-    }, null, freqDist => {
+    }, freqDist => {
         "use strict";
-        //console.log('C', freqDist);
+        console.log('C', freqDist);
     });
 });
