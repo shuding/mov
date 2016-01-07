@@ -3,7 +3,11 @@
  * <ds303077135@gmail.com>
  */
 
-var diameter = 960,
+var loading = document.createElement('P');
+loading.innerText = 'Loading...';
+document.body.appendChild(loading);
+
+var diameter = 400,
     format = d3.format(",d"),
     color = d3.scale.category20c();
 
@@ -20,6 +24,8 @@ var svg = d3.select("body").append("svg")
 d3.json("api/" + movName, function(error, root) {
     if (error) throw error;
 
+    document.body.removeChild(loading);
+
     var node = svg.selectAll(".node")
         .data(bubble.nodes(classes(root))
             .filter(function(d) { return !d.children; }))
@@ -32,7 +38,7 @@ d3.json("api/" + movName, function(error, root) {
 
     node.append("circle")
         .attr("r", function(d) { return d.r; })
-        .style("fill", function(d) { return color(d.packageName); });
+        .style("fill", function(d) { return color(d.value);});//color(d.packageName); });
 
     node.append("text")
         .attr("dy", ".3em")

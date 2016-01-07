@@ -5,9 +5,9 @@ var router  = express.Router();
 
 /* GET users listing. */
 
-router.get('/:name', (req, res) => {
+router.get('/', (req, res) => {
     "use strict";
-    let name = req.param('name');
+    let name = req.query.name;
 
     res.render('keywords', { title: name });
 });
